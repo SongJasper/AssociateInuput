@@ -78,7 +78,7 @@ Pod::Spec.new do |spec|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  spec.source       = { :git => "https://github.com/SongJasper/AssociateInuput.git", :tag => "#{spec.version}" }
+  spec.source       = { :git => "https://github.com/SongJasper/AssociateInuput.git", :tag => "1.1" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
