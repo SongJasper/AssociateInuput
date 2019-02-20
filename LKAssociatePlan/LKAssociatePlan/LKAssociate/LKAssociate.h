@@ -27,7 +27,7 @@
 #endif /* LKAssociate_h */
 
 /*
- 需要的依赖
+ 需要的依赖(工程中可以自己添加或者Pod安装)
  1. FMDB
  2. MJExtension
  3. Masonry
