@@ -70,7 +70,7 @@
             NSLog(@"--database 数据库更新 %@ 失败 %@",content,usql);
         }
     }else{
-        // 插入新的数据
+        // 如果没有类似记录 插入新的数据
         model.content = content;
         NSString *isql = [NSString stringWithFormat:@"insert into %@(%@,count,identifier)values(%@,1,'%@');",self.saveTableViewName,[LKAssociateTools keysArrForObject:model],[LKAssociateTools valuesStrForObject:model],self.identifier];
         BOOL flag = [lk_ass_db executeUpdate:isql];
@@ -83,14 +83,22 @@
 - (NSArray<NSString *> *)showAssociateContentsForKey:(NSString *)key {
     
     if (self.mode == 1) {
-        // 首位判定尾缀算法
+        /*
+         通过词根第一位进行判断,用户输入内容是否已经和词根重合
+         如果重合(第一次)  按照词根第一位 分割字符串 对比后面的内容是否重合 然后进行词根过滤展示
+         
+         */
         NSMutableArray *result = [NSMutableArray array];
         for (NSString *suffix in self.suffixArr) {
             NSString *firstChar = [suffix substringToIndex:1];
             if ([key containsString:firstChar]) {
-                NSString *lastKey = [key componentsSeparatedByString:firstChar].lastObject;
-                NSString *firstKey = [key componentsSeparatedByString:firstChar].firstObject;
-                if ( lastKey.length == 0 || [suffix containsString:lastKey]) {
+                // 不要直接分割 防止出现分割数组 count>2 的情况
+                NSRange range = [key rangeOfString:firstChar];
+                NSString *firstKey = [key substringToIndex:range.location];
+                NSString *lastKey  = [key substringFromIndex:range.location+1];
+                // 需要对比的对象
+                NSString *lastSuffix = [suffix substringFromIndex:1];
+                if ( lastKey.length == 0 || [lastSuffix containsString:lastKey]) {
                    [result addObject:[firstKey stringByAppendingString:suffix]];
                 }
             }else{
@@ -100,6 +108,7 @@
         return result;
     }
     
+    // 历史记录
     LKAssociateBasicModel *model = [self registModel];
     NSString *sql = [NSString stringWithFormat:@"select * from %@ where content like '%%%@%%' and userid = '%@' and type = '%@' and identifier = '%@' order by count desc;",self.saveTableViewName,key,model.userid,model.type,self.identifier];
     if (self.config.maxShowCount) {
@@ -125,6 +134,7 @@
     if (count == 0) {
         self.tableView.hidden = YES;
     } else if (self.mode == 1 && self.text.length == 0){
+        // 没有相关联想内容 则不展示相关控件
         self.tableView.hidden = YES;
     }
     else{
@@ -191,10 +201,8 @@
     if (self.needAssociateView && [self.needAssociateView respondsToSelector:@selector(setText:)]) {
         [self.needAssociateView performSelector:@selector(setText:) withObject:content];
     }
-    if (self.config.sendNotificationWhenSelect) {
-        [[NSNotificationCenter defaultCenter]postNotificationName:LKASSOCIATESELECTNOTIFICATION object:nil];
-    }
-    if (self.config.isInvokeBlockWhenSelect && self.selectBlock) {
+    [[NSNotificationCenter defaultCenter]postNotificationName:LKASSOCIATESELECTNOTIFICATION object:nil];
+    if (self.selectBlock) {
         self.selectBlock(self.needAssociateView, indexPath.row, content);
     }
 }
@@ -225,6 +233,7 @@
 
 #pragma mark - getter / setter
 - (void)setSuffixArr:(NSArray<NSString *> *)suffixArr{
+    // 去重 及 数据源内容校验
     NSMutableArray *arr = [NSMutableArray array];
     for (NSString *key in suffixArr) {
         if (key.length > 0 && ![arr containsObject:key]) {
@@ -260,6 +269,8 @@
             tableView.dataSource = self;
             tableView.rowHeight = self.config.rowHeight;
             tableView.separatorColor = self.config.separatorColor;
+            
+            // 去除tableView分割线边距
             if ([tableView respondsToSelector:@selector(setSeparatorInset:)]) {
                 [tableView setSeparatorInset:UIEdgeInsetsZero];
             }

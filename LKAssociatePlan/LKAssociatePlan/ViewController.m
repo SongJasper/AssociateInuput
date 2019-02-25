@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "LKAssociate.h"
+#import <MobileCoreServices/MobileCoreServices.h>
 
 @interface ViewController ()<UISearchBarDelegate,UITextFieldDelegate>
 @property (nonatomic, strong) UISearchBar *searchBar;
@@ -31,12 +32,14 @@
     self.searchBar = searchBar;
     
     
-    UITextField *tf = [[UITextField alloc]initWithFrame:CGRectMake(30, 500, 300, 50)];
+    UITextField *tf = [[UITextField alloc]initWithFrame:CGRectMake(30, 150, 300, 50)];
     tf.delegate = self;
     tf.placeholder = @"哈哈哈";
+    tf.layer.borderWidth = 1.0;
+    tf.layer.borderColor = [UIColor blackColor].CGColor;
     [self.view addSubview:tf];
 //    [tf openAssociateWithIdentifier:@""];
-    [tf openAssociateWithSuffixArr:@[@"@qq.com",@"@163.com",@"@126.com"]];
+    [tf openAssociateWithSuffixArr:@[@"@qq.com",@"@163.com",@"@126.com",@"@1263.com"]];
     [tf addTarget:self action:@selector(textFieldDidChange:) forControlEvents:(UIControlEventEditingChanged)];
     self.textField = tf;
     
@@ -53,6 +56,15 @@
     [button2 addTarget:self action:@selector(buttonAction:) forControlEvents:(UIControlEventTouchUpInside)];
     button2.tag = 2;
 //    [self.view addSubview:button2];
+    
+    
+    NSArray *extensionArray = [NSArray arrayWithObjects:@"doc", @"docx", @"ppt", @"pptx", @"xls", @"xlsx",@"mp3",@"mp4",@"rft",@"rtf",@"pages",@"key",@"numbers",@"mv",nil];
+    
+    for (int i=0; i<[extensionArray count]; i++) {
+        NSString *fileExtension = [extensionArray objectAtIndex:i];
+        NSString *utiString = (__bridge NSString *)UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension,(__bridge CFStringRef)fileExtension,NULL);
+        NSLog(@"Extension: %@ UTI:%@",fileExtension,utiString);
+    }
 }
 
 - (void)buttonAction:(UIButton *)button{
@@ -96,6 +108,7 @@
     [textField saveAssociateContent:textField.text];
     [textField hideAssociateView];
 }
+
 
 - (void)textFieldDidChange:(UITextField *)textField{
     [textField showAssociateView];

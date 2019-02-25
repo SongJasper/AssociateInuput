@@ -40,8 +40,6 @@ static LKAssociateConfig *_instance = nil;
     self.leadingAndTradingGap = 2;
     
     self.canDeleteRow = YES;
-    self.sendNotificationWhenSelect = NO;
-    self.isInvokeBlockWhenSelect = YES;
     self.textAlignment = NSTextAlignmentLeft;
     
 }

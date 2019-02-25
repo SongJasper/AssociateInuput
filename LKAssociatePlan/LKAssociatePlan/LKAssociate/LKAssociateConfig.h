@@ -16,17 +16,15 @@
 @property (nonatomic, assign) CGFloat rowHeight;/**<搜索栏的行高*/
 @property (nonatomic, assign) NSInteger maxShowCount;/**<最多展示的个数*/
 @property (nonatomic, assign) BOOL canDeleteRow;/**<是否允许删除行*/
-@property (nonatomic, assign) BOOL sendNotificationWhenSelect;/**<是否在选择的时候 发送通知 默认 NO*/
-@property (nonatomic, assign) BOOL isInvokeBlockWhenSelect;/**<是否在选择时调用block*/
 
 
 
 /* ------ style ------ */
-@property (nonatomic, strong) UIColor *borderColor;
-@property (nonatomic, strong) UIColor *separatorColor;
-@property (nonatomic, strong) UIColor *highlightColor;
-@property (nonatomic, assign) NSTextAlignment textAlignment;
-@property (nonatomic, strong) UIFont *contentFont;
-@property (nonatomic, strong) UIColor *contentColor;
+@property (nonatomic, strong) UIColor *borderColor;/**<边框线的颜色*/
+@property (nonatomic, strong) UIColor *separatorColor;/**<tableView分割线颜色*/
+@property (nonatomic, strong) UIColor *highlightColor;/**<关键字高亮颜色*/
+@property (nonatomic, assign) NSTextAlignment textAlignment;/**<联想词汇对齐方式*/
+@property (nonatomic, strong) UIFont *contentFont;/**<联想文字字体大小*/
+@property (nonatomic, strong) UIColor *contentColor;/**<联想文字字体颜色*/
 @property (nonatomic, assign) CGFloat leadingAndTradingGap;/**<前面和后面对齐的间隔,正数向里偏*/
 @end

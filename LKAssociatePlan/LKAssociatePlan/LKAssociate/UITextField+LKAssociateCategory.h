@@ -13,5 +13,11 @@
 @interface UITextField (LKAssociateCategory)<LKAssociateProtocol>
 - (void)openAssociateWithIdentifier:(NSString *)identifier;
 @property (nonatomic, strong) LKAssociateDelegate *associateDelegate;
+
+/**
+ 自动补全功能
+
+ @param arr 相关数组
+ */
 - (void)openAssociateWithSuffixArr:(NSArray *)arr;;
 @end

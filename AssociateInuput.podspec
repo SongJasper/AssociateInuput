@@ -16,15 +16,16 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "AssociateInuput"
-  spec.version      = "1.1"
-  spec.summary      = "show keys what you want"
+  spec.version      = "1.2"
+  spec.summary      = "UISearchBar,UItextField category,show history input content or suffix like @qq.com"
 
   # This description is used to generate tags and improve search results.
   #   * Think: What does it do? Why did you write it? What is the focus?
   #   * Try to keep it short, snappy and to the point.
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
-  spec.description  = "show keys what you want"
+  spec.description  = "UISearchBar,UItextField category,show history input content or suffix like @qq.com 
+  easy to use and please first read demo code"
 
   spec.homepage     = "https://github.com/SongJasper/AssociateInuput"
   # spec.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
@@ -78,7 +79,7 @@ Pod::Spec.new do |spec|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  spec.source       = { :git => "https://github.com/SongJasper/AssociateInuput.git", :tag => "1.1" }
+  spec.source       = { :git => "https://github.com/SongJasper/AssociateInuput.git", :tag => "1.2" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #

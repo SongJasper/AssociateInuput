@@ -346,10 +346,10 @@
 		B2DB682022141F6500A9A77A /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				B2DB67F02213BB4200A9A77A /* LKSearchBarHistoryModel.h */,
-				B2DB67F12213BB4200A9A77A /* LKSearchBarHistoryModel.m */,
 				B2DB67F32213BC3300A9A77A /* LKAssociateBasicModel.h */,
 				B2DB67F42213BC3300A9A77A /* LKAssociateBasicModel.m */,
+				B2DB67F02213BB4200A9A77A /* LKSearchBarHistoryModel.h */,
+				B2DB67F12213BB4200A9A77A /* LKSearchBarHistoryModel.m */,
 				B2863612221559E9003C2742 /* LKTextFieldAssociateModel.h */,
 				B2863613221559E9003C2742 /* LKTextFieldAssociateModel.m */,
 			);

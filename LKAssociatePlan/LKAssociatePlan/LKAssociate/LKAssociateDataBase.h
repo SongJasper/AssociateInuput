@@ -11,9 +11,15 @@
 
 
 
+
+
 #define lk_ass_db [LKAssociateDataBase shareDatabase].database
 #define lk_ass_queue [LKAssociateDataBase shareDatabase].queue
 
+
+/**
+ 公用的数据库对象
+ */
 @interface LKAssociateDataBase : NSObject
 + (instancetype)shareDatabase;
 @property (nonatomic, strong) FMDatabase *database;

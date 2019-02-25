@@ -29,5 +29,5 @@
 @property (nonatomic, copy) void(^selectBlock)(UIView<LKAssociateProtocol> *,NSInteger,NSString *);/**<需要联想的视图,选择的序号,选择的内容*/
 
 
-@property (nonatomic, copy) NSArray<NSString *> *suffixArr;
+@property (nonatomic, copy) NSArray<NSString *> *suffixArr;/**<联想词根数组*/
 @end
